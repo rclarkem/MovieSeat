@@ -1,6 +1,6 @@
 const container = document.querySelector('.container');
 const seats = document.querySelectorAll('.row .seat:not(.occupied)');
-
+let arr = [];
 let count = document.querySelector('#count');
 const total = document.querySelector('#total');
 const movieSelect = document.querySelector('#movie');
@@ -8,7 +8,8 @@ const movieSelect = document.querySelector('#movie');
 let ticketPrice = Number(movieSelect.value);
 
 movieSelect.addEventListener('change', (e) => {
-  ticketPrice = e.target.value;
+  ticketPrice = Number(e.target.value);
+  setMovieData(e.target.selectedIndex, e.target.value);
   countSeats();
 });
 
@@ -21,19 +22,34 @@ container.addEventListener('click', (e) => {
 
 function countSeats() {
   let seatsSelect = document.querySelectorAll('.row .seat.selected');
-  console.log(seatsSelect);
+
+  const seatsIndex = [...seatsSelect].map((seat) => [...seats].indexOf(seat));
 
   const seatsSelectLength = seatsSelect.length;
 
   count.innerText = seatsSelectLength;
-  return (total.innerText = seatsSelectLength * ticketPrice);
+  total.innerText = seatsSelectLength * ticketPrice;
 
-  // My original way but can do it the way above to as an node list
-
-  // if (e.target.classList.contains('selected') && !e.target.classList.contains('occupied')) {
-  //   count.innerText++;
-  // } else if (e.target.classList.contains('seat') && !e.target.classList.contains('occupied')) {
-  //   count.innerText--;
-  // }
-  // return (total.innerText = Number(count.innerText) * ticketPrice);
+  localStorage.setItem('selectedSeats', JSON.stringify(seatsIndex));
 }
+
+function setMovieData(index, value) {
+  localStorage.setItem('selectedMovieIndex', index);
+  localStorage.setItem('selectedMoviePrice', value);
+}
+
+// ---------
+// NOTES
+// ---------
+// My original for CountSeats function way.
+// function countSeats(e, list) {
+//   if (e.target.classList.contains('selected') && !e.target.classList.contains('occupied')) {
+//     count.innerText++;
+//     list.push(e.target);
+//   } else if (e.target.classList.contains('seat') && !e.target.classList.contains('occupied')) {
+//     count.innerText--;
+//     list.pop();
+//   }
+//   total.innerText = Number(count.innerText) * ticketPrice;
+
+// }
