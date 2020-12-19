@@ -1,6 +1,6 @@
 # Movie Seat
 
-![Movie Selector](mainIImg.png)
+![Movie Selector]("./public/mainIImg.png")
 
 This is project two from the 20 Vanilla JS Projects Course by Brad Traversy.
 
