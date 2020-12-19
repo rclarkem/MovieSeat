@@ -1,6 +1,6 @@
 # Movie Seat
 
-![Movie Selector]("./public/mainIImg.png")
+![Movie Selector](https://github.com/rclarkem/MovieSeat/blob/master/public/movieSeat.gif)
 
 This is project two from the 20 Vanilla JS Projects Course by Brad Traversy.
 
